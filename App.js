@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
+  FlatList,
 } from "react-native";
 import BookCount from "./components/BookCount";
 import { Ionicons } from "@expo/vector-icons";
@@ -43,6 +44,38 @@ export default class App extends React.Component {
     );
   };
 
+  markAsRead = (selectedBook, index) => {
+    let newList = this.state.books.filter(book => book !== selectedBook);
+
+    this.setState(prevState => ({
+      books: newList,
+      readingCount: prevState.readingCount - 1,
+      readCount: prevState.readCount + 1,
+    }));
+  };
+
+  renderItem = (item, index) => (
+    <View style={{ height: 50, flexDirection: "row" }}>
+      <View style={{ flex: 1, justifyContent: "center", paddingLeft: 5 }}>
+        <Text>{item}</Text>
+      </View>
+      <TouchableOpacity onPress={() => this.markAsRead(item, index)}>
+        <View
+          style={{
+            width: 100,
+            backgroundColor: "#a5deba",
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontWeight: "bold", color: "white" }}>
+            Mark as read
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -106,6 +139,20 @@ export default class App extends React.Component {
               </TouchableOpacity>
             </View>
           )}
+
+          <FlatList
+            data={this.state.books}
+            renderItem={({ item }, index) => this.renderItem(item, index)}
+            keyExtractor={(item, index) => index.toString()}
+            ListEmptyComponent={
+              <View style={{ marginTop: 50, alignItems: "center" }}>
+                <Text style={{ fontWeight: "bold" }}>
+                  Not Reading any books
+                </Text>
+              </View>
+            }
+          />
+
           <TouchableOpacity
             onPress={this.showAddNewBook}
             style={{ position: "absolute", bottom: 20, right: 20 }}
