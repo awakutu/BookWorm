@@ -11,6 +11,7 @@ import {
 import BookCount from "./components/BookCount";
 import { Ionicons } from "@expo/vector-icons";
 import CustomActionButton from "./components/CustomActionButton";
+import colors from "./assets/colors";
 export default class App extends React.Component {
   constructor() {
     super();
@@ -22,6 +23,19 @@ export default class App extends React.Component {
       books: [],
       textInputdata: "",
     };
+    console.log("constructor");
+  }
+
+  componentDidMount() {
+    console.log("did mount");
+  }
+
+  componentDidUpdate() {
+    console.log("update");
+  }
+
+  componentWillUnmount() {
+    console.log("unmount");
   }
 
   showAddNewBook = () => {
@@ -69,6 +83,7 @@ export default class App extends React.Component {
     </View>
   );
   render() {
+    console.log("render");
     return (
       <View style={styles.container}>
         <SafeAreaView />
@@ -99,7 +114,7 @@ export default class App extends React.Component {
                 <View
                   style={{
                     width: 50,
-                    backgroundColor: '#a5deba',
+                    backgroundColor: colors.bgSuccess,
                     height: 50,
                     alignItems: 'center',
                     justifyContent: 'center'
@@ -163,7 +178,7 @@ const styles = StyleSheet.create({
   header: {
     height: 70,
     borderBottomWidth: 0.5,
-    borderBottomColor: "#E9E9E9",
+    borderBottomColor: colors.borderColor,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -176,11 +191,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    backgroundColor: "#ececec",
+    backgroundColor: colors.bgTextInput,
     paddingLeft: 5,
   },
   checkmarkButton: {
-    backgroundColor: "#a5deba",
+    backgroundColor: colors.bgSuccess,
   },
   listItemContainer: {
     height: 50,
@@ -200,14 +215,14 @@ const styles = StyleSheet.create({
   },
   markAsReadButton: {
     width: 100,
-    backgroundColor: "#a5deba",
+    backgroundColor: colors.bgSuccess,
   },
   markAsReadButtonText: {
     fontWeight: "bold",
     color: "white",
   },
   addNewBookButton: {
-    backgroundColor: "#AAD1E6",
+    backgroundColor: colors.bgPrimary,
     borderRadius: 25,
   },
   addNewBookButtonText: {
@@ -218,7 +233,7 @@ const styles = StyleSheet.create({
     height: 70,
     flexDirection: "row",
     borderTopWidth: 0.5,
-    borderTopColor: "#E9E9E9",
+    borderTopColor: colors.borderColor,
   },
 });
 5.4;
