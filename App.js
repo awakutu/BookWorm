@@ -17,6 +17,8 @@ export default class App extends React.Component {
       readingCount: 0,
       readCount: 0,
       isAddNewBookVisible: false,
+      books: [],
+      textInputdata: "",
     };
   }
 
@@ -26,6 +28,19 @@ export default class App extends React.Component {
 
   hideAddNewBook = () => {
     this.setState({ isAddNewBookVisible: false });
+  };
+
+  addBook = book => {
+    this.setState(
+      (state, props) => ({
+        books: [...state.books, book],
+        totalCount: state.totalCount + 1,
+        readingCount: state.readingCount + 1,
+      }),
+      () => {
+        console.log(this.state.books);
+      },
+    );
   };
 
   render() {
@@ -59,8 +74,11 @@ export default class App extends React.Component {
                 }}
                 placeholder="Enter Book Name"
                 placeholderTextColor="grey"
+                onChangeText={text => this.setState({ textInputdata: text })}
               />
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.addBook(this.state.textInputdata)}
+              >
                 <View
                   style={{
                     width: 50,
