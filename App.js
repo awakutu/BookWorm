@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import BookCount from './components/BookCount';
 
 export default class App extends Component {
   constructor() {
@@ -24,7 +25,7 @@ export default class App extends Component {
             justifyContent: "center",
           }}
         >
-          <Text>Book Worm</Text>
+          <Text style={{fontSize:20}}>Book Worm</Text>
         </View>
         <View style={{ flex: 1 }} />
 
@@ -36,24 +37,9 @@ export default class App extends Component {
             borderTopColor: "#E9E9E9",
           }}
         >
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
-            <Text style={{ fontSize: 20 }}>Total</Text>
-            <Text>{this.state.totalCount}</Text>
-          </View>
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
-            <Text style={{ fontSize: 20 }}>Reading</Text>
-            <Text>{this.state.readingCount}</Text>
-          </View>
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
-            <Text style={{ fontSize: 20 }}>Read</Text>
-            <Text>{this.state.readCount}</Text>
-          </View>
+        <BookCount title="Total" count={this.state.totalCount}/>
+        <BookCount title="Reading" count={this.state.readingCount}/>
+        <BookCount title="Read" count={this.state.readCount}/>
         </View>
         <SafeAreaView />
       </View>
